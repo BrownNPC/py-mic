@@ -44,16 +44,16 @@ jobs:
       with:
         flutter-version: '3.19.0'
 
-    - name: Flet Build Web
+    - name: Flet Build APK
       run: |
             echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}, PROJECT_BASE_URL: ${GITHUB_REPOSITORY#*/}"
-            flet build web --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash --include-packages flet_audio_recorder
+            flet build apk --include-packages flet_audio_recorder
 
     - name: Upload Artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: web-build-artifact  # the name of the artifact
-        path: build/web
+        name: apk-build-artifact  # the name of the artifact
+        path: build/apk
 
   deploy:
     needs: build  # wait for the "build" job to get done before executing this "deploy" job
@@ -69,15 +69,3 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      
-    steps:
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        
-      - name: Deploy to GitHub Pages 🚀
-        if: github.event_name == 'push'  # deploy only on push
-        id: deployment
-        uses: actions/deploy-pages@v4.0.5
-        with:
-          artifact_name: web-build-artifact
-        
