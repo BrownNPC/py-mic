@@ -1,4 +1,7 @@
 import flet as ft
+import http.server as ht
+
+
 
 async def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -61,4 +64,4 @@ async def main(page: ft.Page):
     )
 
 
-app =ft.app(target=main, export_asgi_app=True)
+app =ft.app(target=main)
