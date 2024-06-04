@@ -17,7 +17,8 @@ async def main(page: ft.Page):
         output_path = await audio_rec.stop_recording_async()
         print(f"StopRecording: {output_path}")
         if page.web and output_path is not None:
-            await page.launch_url_async(output_path)
+            page.launch_url(output_path)
+            # await page.launch_url_async(output_path)
 
     async def handle_list_devices(e):
         devices = await audio_rec.get_input_devices_async()
