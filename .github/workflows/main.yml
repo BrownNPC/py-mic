@@ -41,12 +41,8 @@ jobs:
   
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.19.0'
-
     - name: Flet Build APK
       run: |
-            echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}, PROJECT_BASE_URL: ${GITHUB_REPOSITORY#*/}"
             flet build apk --include-packages flet_audio_recorder
 
   release:
