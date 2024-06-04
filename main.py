@@ -14,7 +14,7 @@ async def main(page: ft.Page):
         audio_rec.start_recording(path)
 
     async def handle_stop_recording(e):
-        output_path = await audio_rec.stop_recording_async()
+        output_path = audio_rec.stop_recording()
         print(f"StopRecording: {output_path}")
         if page.web and output_path is not None:
             page.launch_url(output_path)
